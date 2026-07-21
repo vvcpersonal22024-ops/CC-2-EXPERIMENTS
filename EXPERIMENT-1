@@ -1,0 +1,50 @@
+EXPERIMENT 1.1 contains duplicates-I (leetcode-217)
+Aim: Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+
+Algorithm:
+Start
+1.Read the input array nums.
+2.Sort the array in ascending order.
+3.Traverse the array from the second element (index = 1) to the last element.
+4. Compare the current element with the previous element.
+5.If they are equal, return True (duplicate found).
+6.If the loop completes without finding any equal adjacent elements, return False.
+7.End
+
+Code:
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        To_Sort=nums.sort()
+        for i in range(len(nums)):
+            if nums[i]==nums[i-1]:
+                return True
+        return False
+
+
+EXPERIMENT 1.2 Contains duplicates-II (leetcode-219)
+Aim:Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
+
+Algorithm:
+1 Start
+2 Create an empty dictionary Dict to store each element and its latest index.
+3 Traverse the array nums from index 0 to n-1.
+4 For each element nums[i]:
+  Check if the element already exists in the dictionary.
+5 If it exists, calculate the distance between the current index and its previous index:
+  distance = i - Dict[nums[i]]
+6 If the distance is less than or equal to k, return True because a nearby duplicate is found.
+7 Update the dictionary with the current index:
+  Dict[nums[i]] = i
+8 Continue until all elements are checked.
+9 If no nearby duplicate is found, return False.
+10 End
+
+Code:
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        Dict = {}
+        for i in range(len(nums)):
+            if nums[i] in Dict and i - Dict[nums[i]] <= k:
+                return True
+            Dict[nums[i]] = i
+        return False
